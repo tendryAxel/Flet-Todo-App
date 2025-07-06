@@ -14,3 +14,6 @@ class InputText(ft.Row):
     def value(self):
         return self.input_component.value
 
+    def clear(self) -> None:
+        self.input_component.value = ""
+

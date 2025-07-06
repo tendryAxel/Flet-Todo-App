@@ -58,6 +58,8 @@ class TodoList(ft.Column):
 
     def add_todo(self, e: ControlEvent):
         self.todo_list.append(TodoModel(self.task_input.value, ""))
+        self.task_input.clear()
+        self.task_input.update()
         self.todo_list_to_display = self.todo_list
         self.update_todos_display()
 
