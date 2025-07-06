@@ -15,6 +15,12 @@ def create_filter_todos(filter_string: str) -> Callable[[ft.Text], bool]:
 todo_list = [ft.Text(random.random().__str__()) for _ in range(100)]
 todo_list_to_display = todo_list
 
+
+class TodoApp(ft.Column):
+    def __init__(self):
+        super().__init__()
+
+
 def main(page: ft.Page):
     global todo_list_to_display
     todos = ft.ListView(todo_list_to_display, height=500, auto_scroll=True)
@@ -39,10 +45,6 @@ def main(page: ft.Page):
 
     search_filter = ft.TextField(on_change=filter_search)
 
-    page.floating_action_button = ft.FloatingActionButton(
-        icon=ft.Icons.ADD, on_click=add_todo
-    )
-
     page.add(
         ft.SafeArea(
             ft.Container(
@@ -59,6 +61,9 @@ def main(page: ft.Page):
             expand=True,
         ),
         todos,
+        ft.FloatingActionButton(
+            icon=ft.Icons.ADD, on_click=add_todo
+        ),
     )
 
 
