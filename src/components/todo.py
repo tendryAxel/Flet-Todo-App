@@ -5,6 +5,8 @@ from typing import List, AnyStr
 import flet as ft
 from flet.core.control_event import ControlEvent
 
+from components.inputs import InputText
+
 
 @dataclass
 class TodoModel:
@@ -40,11 +42,11 @@ class TodoList(ft.Column):
         self.todo_list: list[TodoModel] = default_todos
         self.todo_list_to_display: list[TodoModel] = self.todo_list
         self.todos = ft.ListView(TodoListItem.from_todos(self.todo_list_to_display), height=500, auto_scroll=True)
-        self.new_task = ft.TextField("test")
-        self.search_filter = ft.TextField(on_change=self.filter_search)
+        self.task_input = InputText("New task", ft.TextField(hint_text="Task name"))
+        self.search_filter = InputText("Search", ft.TextField(hint_text="Search term", on_change=self.filter_search))
         self.controls = [
             ft.Row([
-                self.new_task,
+                self.task_input,
                 ft.FloatingActionButton(
                     icon=ft.Icons.ADD, on_click=self.add_todo
                 ),
@@ -55,7 +57,7 @@ class TodoList(ft.Column):
 
 
     def add_todo(self, e: ControlEvent):
-        self.todo_list.append(TodoModel(self.new_task.value, ""))
+        self.todo_list.append(TodoModel(self.task_input.value, ""))
         self.todo_list_to_display = self.todo_list
         self.update_todos_display()
 
