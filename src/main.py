@@ -2,11 +2,11 @@ import random
 
 import flet as ft
 
-from components.todo import TodoList
+from components.todo import TodoList, TodoModel
 
 
 def main(page: ft.Page):
-    todo_list = TodoList([ft.Text(random.random().__str__()) for _ in range(100)])
+    todo_list = TodoList([TodoModel(random.random().__str__(), random.random().__str__()) for _ in range(100)])
 
     page.add(
         ft.SafeArea(

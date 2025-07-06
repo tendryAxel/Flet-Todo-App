@@ -1,9 +1,9 @@
 from typing import Callable
 
-import flet as ft
+from components.todo import TodoModel
 
 
-def create_filter_todos(filter_string: str) -> Callable[[ft.Text], bool]:
-    def filter_todos(todo: ft.Text) -> bool:
-        return todo.value.__contains__(filter_string)
+def create_filter_todos(filter_string: str) -> Callable[[TodoModel], bool]:
+    def filter_todos(todo: TodoModel) -> bool:
+        return todo.name.__contains__(filter_string)
     return filter_todos
