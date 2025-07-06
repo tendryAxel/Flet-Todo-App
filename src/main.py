@@ -1,8 +1,11 @@
+import random
+
 import flet as ft
 
 
 def main(page: ft.Page):
-    todos = ft.ListView([])
+    todos = ft.ListView([ft.Text(random.random().__str__()) for _ in range(1000)], height=500, auto_scroll=True)
+    new_task = ft.TextField("test")
 
     def add_todo(e):
         todos.controls.append(ft.Text(new_task.value))
@@ -12,7 +15,6 @@ def main(page: ft.Page):
         icon=ft.Icons.ADD, on_click=add_todo
     )
 
-    new_task = ft.TextField("test")
     page.add(
         ft.SafeArea(
             ft.Container(
@@ -20,11 +22,9 @@ def main(page: ft.Page):
                 alignment=ft.alignment.center,
             ),
             expand=True,
-        )
+        ),
+        todos,
     )
-
-
-    page.add(todos)
 
 
 ft.app(main)
